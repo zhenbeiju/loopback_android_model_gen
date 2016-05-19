@@ -1,0 +1,40 @@
+package com.theweflex.www;
+
+import java.util.Date;
+import com.strongloop.android.loopback.Model;
+import java.util.ArrayList;
+
+public class <%= @name %> extends <%= @parent_clas || 'Model' %>
+{
+  <% @attributes.each do |key, value|%>
+  private <%= type_convery value["type"] %> <%= key %>;
+  <% end %>
+
+  <% @relations.each do |key,value|%>
+  private <%= value["model"] %> <%=  class_relation_conv value["type"] %> <%= key %>;
+  <% end %>
+
+  <% @attributes.each do |key, value|%>
+  public void set<%= key.split('_').collect!{ |w| w.capitalize }.join %>(<%= type_convery value["type"] %> <%= key%>) {
+    this.<%= key %> = <%=key%>;
+  }
+  
+  <%= "/**#{value["description"]}*/" if !value["description"].nil?%>
+  public <%= type_convery value["type"] %> get<%= key.split('_').collect!{ |w| w.capitalize }.join %>() {
+    return this.<%= key %>;
+  }
+
+  <% end %>
+
+  <% @relations.each do |key,value|%>
+  public void set<%= key.capitalize %>(<%= value["model"] %> <%=  class_relation_conv value["type"] %> <%= key %>){
+  this.<%= key %> =  <%= key %>; 
+  }
+  
+  public <%= value["model"] %> <%=  class_relation_conv value["type"] %> get<%= key.capitalize %>(){
+   return this.<%= key %>;
+  }
+
+  <% end%>
+
+}

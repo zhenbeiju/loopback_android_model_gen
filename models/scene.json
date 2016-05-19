@@ -1,0 +1,47 @@
+{
+  "name": "WechatScene",
+  "plural": "wechat-scenes",
+  "base": "PersistedModel",
+  "indexes": {
+    "scene_created_index": {
+      "keys": {
+        "sceneId": 1,
+        "created": 1
+      }
+    },
+    "event_created_index": {
+      "keys": {
+        "eventType": 1,
+        "created": 1
+      }
+    }
+  },
+  "idInjection": true,
+  "properties": {
+    "eventType": {
+      "type": "string",
+      "required": true
+    },
+    "openid": {
+      "type": "string",
+      "required": true
+    },
+    "sceneId": {
+      "type": "string",
+      "required": true
+    },
+    "created": {
+      "type": "date",
+      "defaultfn": "now",
+      "required": true
+    },
+    "payload": {
+      "type": "Object",
+      "reuqired": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}
