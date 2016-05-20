@@ -39,6 +39,23 @@ class BaseModel
     str.is_a?(Array) ? "ArrayList<#{result_name}>" : result_name
   end
 
+
+  def small_name_convert str
+   result = str.split(/[-_]/).collect!.with_index{  |w,index| 
+        if index ==0
+          w
+        else
+         w.capitalize
+       end}.join
+   #puts "#{str} | #{result}"
+   return result
+  end
+
+  def big_name_convert str
+    str.split(/[-_]/).collect!.with_index{ |w,index| w.capitalize}.join
+  end
+
+
   def class_relation_conv (str)
     result ={
       "hasMany" =>'[]'

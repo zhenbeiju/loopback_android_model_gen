@@ -9,7 +9,7 @@ public class <%= @name %> extends <%= @parent_clas || 'Model' %>{
     private <%= type_convery value["type"] %> <%= key %>;
     <% end %>
     <% @relations.each do |key,value|%>
-    private <%= value["model"] %> <%=  class_relation_conv value["type"] %> <%= key %>;
+    private <%= value["model"] %> <%=  class_relation_conv value["type"] %> <%= small_name_convert key %>;
     <% end %>
 
     <% @attributes.each do |key, value|%>
@@ -17,17 +17,17 @@ public class <%= @name %> extends <%= @parent_clas || 'Model' %>{
       this.<%= key %> = <%=key%>;
     }
     <%= "/**#{value["description"]}*/" if !value["description"].nil?%>
-    public <%= type_convery value["type"] %> get<%= key.split('_').collect!{ |w| w.capitalize }.join %>() {
+    public <%= type_convery value["type"] %> get<%= big_name_convert key %>() {
       return this.<%= key %>;
     }
     <% end %>
-
     <% @relations.each do |key,value|%>
-    public void set<%= key.capitalize %>(<%= value["model"] %> <%=  class_relation_conv value["type"] %> <%= key %>){
-      this.<%= key %> =  <%= key %>; 
+    public void set<%= big_name_convert key %> (<%= value["model"] %> <%=  class_relation_conv value["type"] %> <%= small_name_convert key  %>){
+      this.<%= small_name_convert key %> = <%= small_name_convert key %>; 
     } 
-    public <%= value["model"] %> <%=  class_relation_conv value["type"] %> get<%= key.capitalize %>(){
-      return this.<%= key %>;
+    
+    public <%= value["model"] %> <%=  class_relation_conv value["type"] %> get<%= big_name_convert key %>(){
+      return this.<%= small_name_convert key %>;
     }
     <% end %>
 
