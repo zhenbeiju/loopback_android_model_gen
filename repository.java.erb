@@ -1,0 +1,11 @@
+package com.theweflex.www;
+
+import com.strongloop.android.loopback.ModelRepository;
+
+public class <%= "#{@name}Repository"%> extends <%= "ModelRepository<#{@name}>"%>
+{
+  public <%= "#{@name}Repository"%>() {
+      super("<%= @filename %>", <%="#{@name}.class" %>);
+  }
+
+}
